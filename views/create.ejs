@@ -1,0 +1,23 @@
+<html lang="en">
+<head>
+  <%- include('./partials/header.ejs') %>
+
+</head>
+<body>
+  <%- include('./partials/nav.ejs') %>
+  
+  <div class="create-form content">
+    <form id="form" action='/add' method="POST">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><!--title-->
+      <label for="description">description:</label>
+      <textarea id="description" name="description" required></textarea><!--body-->
+      <label for="test">testid:</label>
+      <input type="number" id="test" name="test" required><!--snippet-->
+      <button>Submit</button>
+    </form>
+   
+  </div>
+  <%- include('./partials/footer.ejs') %>
+</body>
+</html>
