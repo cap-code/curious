@@ -1,2 +1,2 @@
 # curious
- To install all dependencies run commmand "npm install"
+ basic e commerce application with razorpay payment gateway ,and nodeserver
