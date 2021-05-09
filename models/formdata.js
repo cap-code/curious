@@ -3,17 +3,33 @@ const Schema = mongoose.Schema;
 
 
 const formSchema = new Schema({
+    product_id:{
+        type:String,
+        required:true
+    },
+    product_name:{
+        type:String,
+        required:true
+    },
     name:{
         type:String,
         required:true
     },
-    description:{
+    content:{
         type:String,
         required:true
     },
-    test:{
+    number:{
+        type:String,
+        required:true
+    },
+    totalprice:{
         type:Number,
-        required:true,
+        required:true
+    },
+    image:{
+        type:String,
+        required:true
     }
 },{timestamps:true});
 

@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+  <%- include('./partials/header.ejs') %>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <%- include('./partials/nav.ejs') %>
+   <h1>E-commerce</h1>
+   <h2>payement page</h2>
+   <p style="display:none"></p>
+  <button data-id="<%= data.id %>" data-key="<%= keyid %>"data-price="<%= price %>" class="payButton">pay</button>
+   <script>
+     const button = document.querySelector('.payButton');
+     const order_id = button.dataset.id;
+     const key = button.dataset.key;
+     const price = button.dataset.price;
+     var options = {
+    "key": key, 
+    "amount": price, 
+    "currency": "INR",
+    "name": "Curious Corp",
+    "description": "Test Transaction",
+    "image": "/test.png",
+    "order_id": order_id, 
+    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+
+    "handler": function (response){
+        console.log(response);
+        const data = {
+        orderid: order_id,
+        payid:response.razorpay_payment_id,
+        payorderid:response.razorpay_order_id,
+        sig:response.razorpay_signature
+        }
+        fetch('/success',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json',
+            },
+            body:JSON.stringify(data)
+        }).then(response=>response.json())
+        .then(data => console.log(data))
+        .catch(err=>console.log("error in payment server side checking,",err));
+       
+    },
+    "prefill": {
+        "name": "tom grigory",
+        "email": "tom.griory@example.com",
+        "contact": "9999999999"
+    },
+    "notes": {
+        "address": "Curious Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+button.onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+
+
+   </script>
+  <%- include('./partials/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+  <%- include('./partials/header.ejs') %>
+
+</head>
+<body>
+  <%- include('./partials/nav.ejs') %>
+   <h1>E-commerce</h1>
+   <h2>Inside your cart</h2>
+    <div id="cart-details">
+      <% if (products.length > 0) { %>
+        <% products.forEach(product => { %>
+          <h3 class="name"><%= product.name %></h3>
+          <img src="<%= product.image %>" alt="test" style="max-width: 300px;max-height: 300px;"/>
+          <h4 >price:<%= product.totalprice %></h4>
+          <h4 >total number:<%= product.number%></h4>
+        <% }) %>
+        <a href="/pay/<%= total %>"><button>proceed to pay</button></a>
+      <% } else { %>
+        <p>There are no items in cart to display...</p>
+      <% } %>
+    </div>
+  <%- include('./partials/footer.ejs') %>
+</body>
+</html>

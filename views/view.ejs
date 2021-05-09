@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+  <%- include('./partials/header.ejs') %>
+
+</head>
+<body>
+  <%- include('./partials/nav.ejs') %>
+  <div>
+    <img id="img" src="<%= product.image %>" alt="test" />
+    <p>
+      name:<span id="span_name"><%= product.name %></span>
+      <p></p>
+      price:<span id="span_price"><%= product.price %></span>
+    </p>
+  </div>
+  <div>
+    <form id="form" data-id="<%= product._id %>">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><!--title-->
+      <label for="description">content:</label>
+      <textarea id="description" name="description" required></textarea><!--body-->
+      <label for="test">number</label>
+      <input type="number" id="test" name="test" required><!--snippet-->
+      <button>Add to cart</button>
+    </form>
+   
+  </div>
+  <script>
+    const form = document.querySelector('#form');
+
+    form.addEventListener('submit',evt=>{
+      evt.preventDefault();
+      const formData = new FormData(form);
+      const name  = formData.get('name');
+      const content = formData.get('description');
+      const number = formData.get('test');
+      const price = document.querySelector('#span_price').textContent;
+      const totalprice = number * parseFloat(price);
+      const product_id = `${form.dataset.id}`;
+      const product_name = document.querySelector('#span_name').textContent;
+      const image = document.getElementById('img').src;
+      const data = {
+        product_id,
+        product_name,
+        name,
+        content,
+        number,
+        totalprice,
+        image
+      }
+      fetch('/add',{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(data)
+      }).then(response=> response.json())
+      .then(data=>console.log(data));
+      form.reset();
+    })
+  </script>
+  <%- include('./partials/footer.ejs') %>
+</body>
+</html>
