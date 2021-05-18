@@ -5,12 +5,12 @@
 </head>
 <body>
   <%- include('./partials/nav.ejs') %>
-   <h1>E-commerce</h1>
-   <h2>payement page</h2>
+   <h1 class="text-left display-4">Madona</h1>
+   <h4 class="text-center ">payement page</h4>
    <p style="display:none"></p>
-  <button data-id="<%= data.id %>" data-key="<%= keyid %>"data-price="<%= price %>" class="payButton">pay</button>
+  <button data-id="<%= data.id %>" data-key="<%= keyid %>"data-price="<%= price %>" id="payButton" class="btn btn-primary">pay</button>
    <script>
-     const button = document.querySelector('.payButton');
+     const button = document.querySelector('#payButton');
      const order_id = button.dataset.id;
      const key = button.dataset.key;
      const price = button.dataset.price;

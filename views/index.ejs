@@ -5,18 +5,38 @@
 </head>
 <body>
   <%- include('./partials/nav.ejs') %>
-   <h1>E-commerce</h1>
-
-   <% if (datas.length > 0) { %>
-    <% datas.forEach(data => { %>
-      <h3 class="name"><%= data.name %></h3>
-      <img src="<%= data.image %>" alt="test" style="max-width: 300px;max-height: 300px;"/>
-      <h4><%= data.price %></h4>
-      <a href="/view/<%= data.name %>/<%= data._id%>">view</a>
-    <% }) %>
-  <% } else { %>
-    <p>There are no blogs to display...</p>
-  <% } %>
+   <div class="container-fluid  justify-content-center">
+      <div class="row">
+        <div class="col-sm-6">
+             <h1 class="display-1 font-weight-bold">
+               Tag line 
+             </h1>
+             <h1 class="display-2">
+               that blow minds
+             </h1>
+        </div>
+        <div class="col-sm-6">
+           <img class="img-fluid  " src="/hero.png" alt="hero"/>
+        </div>
+      </div>
+   </div>
+   <div class="container-fluid mt-5">
+     <h1 class="display-4 mb-3">Curated categories</h1>
+     <div id="view">
+      <% if (datas.length > 0) { %>
+        <% datas.forEach(data => { %>
+          <div class="card">
+          <img src="<%= data.image %>" alt="card image" class="card-img-top"/>
+          <div class="card-body">
+          <a href="/view/<%= data.name %>/<%= data._id%>"><h3 class="card-title text-center text-dark"><%= data.name %></h3></a>
+        </div>
+        </div>
+          <% }) %>
+      <% } else { %>
+        <p>There are no content to display...</p>
+      <% } %>
+     </div>
+   </div>
 
   <%- include('./partials/footer.ejs') %>
 </body>

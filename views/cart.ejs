@@ -5,21 +5,27 @@
 </head>
 <body>
   <%- include('./partials/nav.ejs') %>
-   <h1>E-commerce</h1>
-   <h2>Inside your cart</h2>
-    <div id="cart-details">
+   <h1 class="text-left display-4">Madona</h1>
+   <h3 class="text-left">Here is your Cart</h3>
+   <div class="container-fluid  justify-content-center ">
       <% if (products.length > 0) { %>
+        <div id="view">
         <% products.forEach(product => { %>
-          <h3 class="name"><%= product.name %></h3>
-          <img src="<%= product.image %>" alt="test" style="max-width: 300px;max-height: 300px;"/>
-          <h4 >price:<%= product.totalprice %></h4>
-          <h4 >total number:<%= product.number%></h4>
+          <div class="card">
+          <img src="<%= product.image %>" alt="test" class="card-img-top"/>
+          <div class="card-body">
+            <h3 class="card-title text-center"><%= product.name %></h3>
+            <h4 class="card-text text-center">price:<%= product.totalprice %></h4>
+            <h4 class="card-text text-center" >total number:<%= product.number%></h4>
+          </div>
+        </div>
         <% }) %>
-        <a href="/pay/<%= total %>"><button>proceed to pay</button></a>
+        </div>
+        <a href="/pay/<%= total %>"><button class="btn btn-primary mt-4">proceed to pay</button></a>
       <% } else { %>
         <p>There are no items in cart to display...</p>
       <% } %>
-    </div>
+  </div>
   <%- include('./partials/footer.ejs') %>
 </body>
 </html>
